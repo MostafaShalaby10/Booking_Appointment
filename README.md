@@ -1,16 +1,33 @@
-# doctors
+# Booking an appointment
 
-A new Flutter project.
+# This is flutter app using Firebase
 
-## Getting Started
+# To run this project must connect to wifi and write pub get in terminal of android studio
 
-This project is a starting point for a Flutter application.
+# Application consist of admin , user and doctor
 
-A few resources to get you started if this is your first Flutter project:
+## What user can do : 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- User can book at any doctor he wants and enter his data while booking
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## What admin can do : 
+
+- Admin can add doctors to the app\
+  
+## What doctor can do : 
+
+- Doctor can see the data of patients which book an appointment
+
+
+# Using in this app 
+
+- flutter_bloc
+- bloc
+- fluttertoast
+- conditional_builder
+- shared_preferences
+- firebase_core
+- firebase_auth
+- cloud_firestore
+
+
