@@ -1,10 +1,11 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
-import 'package:doctors/Doctors/home.dart';
+import 'package:doctors/pages/Doctors/home.dart';
 import 'package:doctors/bloc/bloc.dart';
 import 'package:doctors/bloc/states.dart';
 import 'package:doctors/components/components.dart';
 import 'package:doctors/pages/admin/admin.dart';
 import 'package:doctors/pages/user/home.dart';
+import 'package:doctors/sharedPrefs/sharedprefrences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -34,6 +35,7 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return BlocConsumer<cubit, States>(builder: (context, state) {
       return Scaffold(
+        appBar: appBar(context, page: const UserHomePage() , icon: Icons.home , text: "Home"),
         key: scaffoldKey,
         body: SingleChildScrollView(
           child: Padding(
@@ -42,7 +44,7 @@ class _LoginState extends State<Login> {
               key: formKey,
               child: SizedBox(
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
+                height: MediaQuery.of(context).size.height/1.2,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,12 +129,14 @@ class _LoginState extends State<Login> {
             timeInSecForIosWeb: 1);
         if (emailController.text == "admin@gmail.com" &&
             passwordController.text == "123456") {
-
+          sharedprefs.savedata(key: "login", value: true) ;
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const Admin()),
               (route) => false);
         } else {
+          sharedprefs.savedata(key: "login", value: true) ;
+
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const DoctorHomePage()),

@@ -1,3 +1,5 @@
+import 'package:doctors/pages/authentication/login.dart';
+import 'package:doctors/sharedPrefs/sharedprefrences.dart';
 import 'package:flutter/material.dart';
 
 Widget editText({
@@ -55,3 +57,47 @@ Widget button(
         ),
       ),
     );
+PreferredSizeWidget? appBar(context , {required Widget page , required IconData icon , required String text})
+{
+  List<PopupMenuEntry> items = [
+    PopupMenuItem(
+      value: 0,
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: Colors.black,
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Text(text)
+        ],
+      ),
+    ),
+  ];
+
+  return AppBar(
+    title: Text("Booking" , style: TextStyle(color: Colors.black),),
+    centerTitle: true,
+    backgroundColor: Colors.white,
+    elevation: 0,
+    actions: [
+      PopupMenuButton(
+        itemBuilder: (context) => items,
+        color: Colors.white,
+        icon: Icon(Icons.menu , color: Colors.black,),
+        onSelected: (value) {
+          if (value == 0) {
+            if(text=="Logout")
+              sharedprefs.removedata(key: "login");
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => page));
+          }
+        },
+      ),
+    ],
+  );
+}

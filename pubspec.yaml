@@ -16,6 +16,7 @@ dependencies:
   conditional_builder_null_safety: ^0.0.6
   fluttertoast: ^8.0.9
   flutter_bloc: ^8.1.1
+  shared_preferences: ^2.0.15
   bloc: ^8.1.0
   cupertino_icons: ^1.0.2
 

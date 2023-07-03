@@ -1,6 +1,7 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:doctors/bloc/bloc.dart';
 import 'package:doctors/bloc/states.dart';
+import 'package:doctors/components/components.dart';
 import 'package:doctors/pages/authentication/login.dart';
 import 'package:doctors/pages/user/Specialization.dart';
 import 'package:doctors/pages/user/doctors.dart';
@@ -12,6 +13,23 @@ class UserHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<PopupMenuEntry> items = [
+      PopupMenuItem(
+        value: 0,
+        child: Row(
+          children: [
+            Icon(
+              Icons.login,
+              color: Colors.black,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text("Doctor")
+          ],
+        ),
+      ),
+    ];
     return BlocConsumer<cubit, States>(
         builder: (context, state) {
           // cubit.get(context).getspecialization();
@@ -19,25 +37,7 @@ class UserHomePage extends StatelessWidget {
               condition: true,
               builder: (context) => Scaffold(
                     backgroundColor: Colors.white,
-                    appBar: AppBar(
-                      backgroundColor: Colors.white,
-                      elevation: 0,
-                      actions: [
-                        TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Login()));
-                            },
-                            child: Text(
-                              "Are you doctor",
-                              style: TextStyle(
-                                color: Colors.black,
-                              ),
-                            )),
-                      ],
-                    ),
+                    appBar: appBar(context, page: const Login() , icon: Icons.login , text: "Doctor"),
                     body: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       child: SingleChildScrollView(

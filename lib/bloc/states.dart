@@ -35,3 +35,11 @@ class ErrorBooking extends States{}
 class LoadingGetAllPatients extends States{}
 class SuccessGetAllPatients extends States{}
 class ErrorGetAllPatients extends States{}
+
+class LoadingClearAllData extends States{}
+class SuccessClearAllData extends States{}
+class ErrorClearAllData extends States{}
+
+class LoadingClearSpecificData extends States{}
+class SuccessClearSpecificData extends States{}
+class ErrorClearSpecificData extends States{}

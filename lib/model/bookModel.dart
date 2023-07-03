@@ -6,7 +6,9 @@ class PatientModel {
   String? age;
 
 
-  PatientModel({this.name, this.phone,  this.age});
+
+
+  PatientModel({this.name, this.phone,  this.age  });
 
   PatientModel.fromjson(Map<String, dynamic> json) {
     name = json['name'];

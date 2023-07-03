@@ -3,6 +3,7 @@ import 'package:doctors/bloc/bloc.dart';
 import 'package:doctors/bloc/states.dart';
 import 'package:doctors/components/components.dart';
 import 'package:doctors/pages/admin/admin.dart';
+import 'package:doctors/pages/authentication/login.dart';
 import 'package:doctors/pages/user/doctors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,6 +36,8 @@ class _AddDoctorState extends State<AddDoctor> {
     return BlocConsumer<cubit, States>(builder: (context, state) {
       var items = ['1', '2', '3'];
       return Scaffold(
+        appBar: appBar(context, page: const Login() , icon: Icons.logout , text: "Logout"),
+
         key: scaffoldKey,
         body: SingleChildScrollView(
           child: SafeArea(

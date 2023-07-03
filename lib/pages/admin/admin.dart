@@ -1,6 +1,8 @@
 import 'package:doctors/bloc/bloc.dart';
 import 'package:doctors/bloc/states.dart';
+import 'package:doctors/components/components.dart';
 import 'package:doctors/pages/admin/addDoctor.dart';
+import 'package:doctors/pages/authentication/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,6 +13,8 @@ class Admin extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<cubit , States>(builder: (context , state){
       return Scaffold(
+        appBar: appBar(context, page: const Login() , icon: Icons.logout , text: "Logout"),
+
         body: SafeArea(
           child: SizedBox(
             height: MediaQuery.of(context).size.height,

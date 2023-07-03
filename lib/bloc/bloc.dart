@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctors/bloc/states.dart';
 import 'package:doctors/model/bookModel.dart';
 import 'package:doctors/model/doctorModel.dart';
+import 'package:doctors/sharedPrefs/sharedprefrences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,17 +18,15 @@ class cubit extends Cubit<States> {
     "عظام",
     "اطفال"
   ];
-String? id ;
   void login({
     required String email,
     required String password,
   }) {
-    id = null;
     emit(LoadingLogin());
     FirebaseAuth.instance
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) {
-         id = value.user!.uid ;
+          sharedprefs.savedata(key: "ID", value: value.user!.uid);
          getPatients();
       emit(SuccessfulLogin());
     }).catchError((error) {
@@ -106,11 +105,11 @@ String? id ;
     allDoctors = [];
     emit(LoadingGetSpecialization());
     FirebaseFirestore.instance.collection("Doctors").get().then((value) {
-      value.docs.forEach((element) {
+      for (var element in value.docs) {
         if (element.data()["specialization"] == s) {
           allDoctors.add(DoctorModel.fromjson(element.data()));
         }
-      });
+      }
 
       emit(SuccessGetSpecialization());
     }).catchError((error) {
@@ -125,7 +124,8 @@ String? id ;
     required String age,
     required String name,
     required String phone,
-    required String id,
+    required String doctorID,
+    required DateTime date,
   }) {
     patientModel = PatientModel(
       age: age,
@@ -135,10 +135,11 @@ String? id ;
     emit(LoadingBooking());
     FirebaseFirestore.instance
         .collection("Doctors")
-        .doc(id)
+        .doc(doctorID)
         .collection("Booking")
         .add(patientModel!.tomap())
         .then((value) {
+
       emit(SuccessBooking());
     }).catchError((error) {
       print(error.toString());
@@ -149,18 +150,22 @@ String? id ;
 
   void getPatients()
   {
+    print("Saajdskbkjwdhakuwdhqiudwhqiuwdhuiwqd");
     allPatients = [];
     emit(LoadingGetAllPatients());
-    FirebaseFirestore.instance.collection("Doctors").doc(id).collection("Booking").get().then((value) {
+    FirebaseFirestore.instance.collection("Doctors").doc(sharedprefs.getdata(key: "ID")).collection("Booking").get().then((value) {
+
       value.docs.forEach((element) {
-          allPatients.add(PatientModel.fromjson(element.data()));
+        allPatients.add(PatientModel.fromjson(element.data()));
+
 
       });
-
       emit(SuccessGetAllPatients());
     }).catchError((error) {
       print(error.toString());
       emit(ErrorGetAllPatients());
     });
   }
+  
+
 }
